@@ -1,0 +1,11 @@
+import AUTHMUTATIONS from './Auth';
+import LINKMUTATIONS from './Link';
+
+const { SIGNUP_MUTATION, LOGIN_MUTATION } = AUTHMUTATIONS;
+const { POST_MUTATION } = LINKMUTATIONS;
+
+export default {
+    POST_MUTATION,
+    SIGNUP_MUTATION,
+    LOGIN_MUTATION
+}
