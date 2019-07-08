@@ -7,13 +7,18 @@ const SIGNUP_MUTATION = gql`
             email: $email
             password: $password
         ){
-            token
-            user {
-            id
-            user_id
-            name
-            email
-            }      
+            payload {
+                token
+                user {
+                        user_id
+                        email
+                        name
+                    }
+                }
+            error {
+                field
+                message
+                }  
         }
     }
 `
@@ -24,11 +29,17 @@ const LOGIN_MUTATION = gql`
             email: $email
             password: $password
         ){
-            token
-            user {
-                id
-                user_id
-                email
+            payload {
+                token
+                user {
+                    user_id
+                    email
+                    name
+                }
+        }
+            error {
+            field
+            message
             }
         }   
     }   

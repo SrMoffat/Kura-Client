@@ -20,7 +20,6 @@ body {
   font-size: 16px;
   line-height: 1.7;
   color: #777;
-  padding: 20px;
 }
 
 html {
@@ -142,6 +141,10 @@ html {
   transition: all .2s;
 }
 
+.btn-purple:hover {
+  box-shadow: 0 2.5px 5px rgba(0, 0, 0, 0.5);
+}
+
 .animated-btn {
   animation: moveInBottom 1s ease-out .75s;
   animation-fill-mode: backwards;
@@ -168,7 +171,7 @@ html {
 input[type=text], input[type=password], input[type=email] {
   width: 100%;
   padding: 15px;
-  margin: 5px 0 20px 0;
+  margin: 5px 0 0 0;
   display: inline-block;
   border: none;
   background: #f1f1f1;
@@ -184,6 +187,13 @@ input[type=text]:focus, input[type=password]:focus, input[type=email]:focus {
   font-size: 18px;
 }
 
+.input::after{
+  content: attr(name);
+  font-size: 12px;
+  color: red;
+  vertical-align: top;
+}
+
 .form-text {
   font-size: 14px;
   padding: 0 20px;
@@ -194,6 +204,124 @@ input[type=text]:focus, input[type=password]:focus, input[type=email]:focus {
   text-decoration: none;
   color: var(--primary);
 }
+
+
+.login-form-text {
+  font-size: 14px;
+  padding: 0 20px;
+  color: #fff;
+}
+
+.login-form-link {
+  padding: 0 10px;
+  text-decoration: none;
+  color: #fff;
+}
+
+.login-container {  
+  /* background: red; */
+  background: rgba(246, 232, 255, 0.3);
+  height: 970px;
+  
+}
+
+.login-section {
+  background-image:
+    linear-gradient(
+      to right bottom,
+      var(--primary-tinted), var(--dark-tinted)),
+    url(../images/bgimg3.jpg);
+  background-size: cover;
+  padding: 100px 0;
+  transform: skewY(-8deg);
+  margin-top: 80px;
+  height: 620px;
+}
+
+.login-section > * {
+  transform: skewY(8deg);
+}
+
+.login-form {
+  margin: auto;
+  width: 30%;
+  margin-top: 70px;
+
+}
+
+.login-form label {
+  color: #fff;
+}
+
+.logop-container {
+
+  top: 0;
+
+}
+
+.logop {
+  height: 40px; 
+}
+
+.brand {
+  color: #46307B;
+  text-transform: uppercase;
+  font-size: 35px;
+  padding: 0 5px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto 1fr;
+}
+
+.side-nav {
+  background-color: #46307B;
+  display: grid;
+  grid-template-columns: 64px 240px;
+  height: 100vh;
+}
+
+.side-pane {
+  background-color: #39236E;
+  display: grid;
+  justify-items: center;
+
+}
+
+.side-pane span:not(:first-child) {
+  background-color: red;
+  height: 35px;
+}
+.app-content {
+  /* background-color: green; */
+}
+
+.side-pane-logo {
+  width: 50px;
+  height: 50px;  
+}
+
+.side-pane-icons img {
+  width: 35px;
+  height: 35px;  
+}
+
+.side-pane-icons::after {
+  display: '';
+  background: red;
+}
+
+.side-pane-logout {
+  width: 35px;
+  height: 35px;
+}
+
+
+.active-side-icon {
+
+}
+
 
 @keyframes moveInLeft {
   0% {
@@ -236,4 +364,3 @@ input[type=text]:focus, input[type=password]:focus, input[type=email]:focus {
     transform: translateY(0);    
   }
 }
-
