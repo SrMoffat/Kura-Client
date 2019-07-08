@@ -7,9 +7,11 @@ import AUTH_TOKEN from '../../constants';
 
 const { SIGNUP_MUTATION } = AUTHMUTATIONS;
 
-const SignupForm = ({props}) => {
+const SignupForm = ({ props }) => {
     const [values, setValues] = useState({});
     const { name, email, password } = values;
+
+    const [errors, setErrors] = useState({})
 
     const onChange = (e) => {
         const { target: { name, value } } = e;
@@ -24,12 +26,29 @@ const SignupForm = ({props}) => {
 
     
     const confirm = async (data) => {
-        const { signUp: { token } } = data;
+        const { signUp: { payload, error } } = data;
 
-        saveUserData(token);
+        if(payload){
+            const { history } = props;
+            const { token } = payload;
 
-        props.history.push('/login');
+            saveUserData(token);
+             
+            history.push('/login');
+        } else {
+
+            const newState = { [error.field] : error.message }
+
+            setErrors({...errors, ...newState})     
+        }
     }
+
+    // useEffect(() => {
+    //     console.log(errors)
+
+    // }, [errors])
+
+
     
     const inputs = [
         {
@@ -39,7 +58,8 @@ const SignupForm = ({props}) => {
             onChange, 
             value: name, 
             type: 'text',
-            key: 'name'
+            key: 'name',
+            errors
         },
         {
             label: 'Email', 
@@ -48,7 +68,8 @@ const SignupForm = ({props}) => {
             onChange, 
             value: email, 
             type: 'email',
-            key: 'email'
+            key: 'email',
+            errors
         },
         {
             label: 'Password', 
@@ -57,12 +78,13 @@ const SignupForm = ({props}) => {
             onChange, 
             value: password, 
             type: 'password',
-            key: 'pass'
+            key: 'pass',
+            errors
         }
     ]  
 
     return(
-        <form className="signup-section" onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
             {
                 inputs.map(input => (<TextInput {...input} />))
             }

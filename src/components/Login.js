@@ -1,78 +1,102 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { Mutation } from 'react-apollo';
+
+import logo from '../images/logop.png'
+import TextInput from './TextInput';
 import AUTH_TOKEN from '../constants';
 import AUTHMUTATIONS from '../queries/mutation';
 
-const { SIGNUP_MUTATION, LOGIN_MUTATION } = AUTHMUTATIONS;
+const { LOGIN_MUTATION } = AUTHMUTATIONS;
 
-class Login extends Component {
-    state = {
-        login: true,
-        email: '',
-        password: '',
-        name: ''
+const Login = (props) => {
+    const [values, setValues] = useState({});
+    const { email, password } = values;
+
+    const [errors, setErrors] = useState({});
+
+    const handleSubmit = e => { e.preventDefault() };
+    
+    const onChange = (e) => {
+        const { target: { name, value } } = e;
+        const newState = { ...values, [name] : value };
+
+        setValues(newState);
     }
 
-    render(){
-        const { name, email, password, login } = this.state;
-        return(
-            <div>
-                <h4 className="">{ login ? 'Login' : 'Sign Up' }</h4>
-                <div className="">
-                    { !login && (
-                        <input
-                            value={name}
-                            type="text"
-                            placeholder="4fr0c0d3"
-                            onChange={e => this.setState({ name: e.target.value })}                 
-                        />
-                    )}
-                    <input
-                        value={email}
-                        type="text"
-                        placeholder="email@mail.com"
-                        onChange={e => this.setState({ email: e.target.value }) }                      
-                    />
-                    <input
-                        value={password}
-                        type="password"
-                        placeholder="p4ssw0rd"
-                        onChange={e => this.setState({ password: e.target.value }) }                      
-                    />
-                </div>
-                <div className="">
-                    <Mutation
-                        mutation={login ? LOGIN_MUTATION : SIGNUP_MUTATION }
-                        variables={{ name, email , password }}
-                        onCompleted={data => this._confirm(data)}
-                    >
-                        {mutation => (
-                            <div className="" onClick={mutation}>
-                            { login ? 'Login' : 'Create Account'}
+    const confirm = async data => {
+        const { login: { payload, error } } = data;
+        
+        if(payload){
+            const { history } = props;
+            const { token } = payload;
 
-                            </div>
-                        )}
-                    </Mutation>
-                    <div className="" onClick={() => this.setState({ login: !login })}>
-                        {login ? 'Need to create an account' : 'Already have an account?'}
-                    </div>
-                </div>
-            </div>
-        )
+            saveUserData(token);    
+            history.push('/clusters');
+
+        } else {
+
+            const newState = { [error.field] : error.message };
+
+            setErrors({ ...errors, ...newState });
+
+            // TODO: Clear form when the error has been corrected
+        }
     }
 
-    _confirm = async data => {
-        const { token } = this.state.login ? data.login : data.signUp;
-        const { history } = this.props;
-
-        this._saveUserData(token);
-
-        history.push('/');
-    }
-
-    _saveUserData = token => {
+    const saveUserData = token => {
         localStorage.setItem(AUTH_TOKEN, token);
     }
+
+    const inputs = [
+        {
+            label: 'Email',
+            name: 'email',
+            type: 'email',
+            value: email,
+            onChange,
+            key: 'email',
+            placeholder: 'mail@email.com',
+            errors
+        },
+        {
+            label: 'Password',
+            name: 'password',
+            type: 'password',
+            value: password,
+            onChange,
+            key: 'password',
+            placeholder: 'password',
+            errors
+        }
+    ]
+
+
+    return(
+       <div className="login-container">
+            <div className="logop-container">
+                <img src={logo} alt="Kura" className="logop"/>
+                <span className="brand">Kura</span>
+            </div>
+            <div className="login-section">
+                <form className="login-form" onSubmit={handleSubmit}>
+                    { inputs.map(input => (<TextInput {...input}/>)) }
+                    <Mutation
+                        mutation={LOGIN_MUTATION}
+                        variables={{ email , password }}
+                        onCompleted={data => confirm(data)}
+                    >
+                        {mutation => (
+                            <button className="btn btn-white" onClick={mutation}>Login</button>  
+                        )}
+                    </Mutation>
+
+                    <span className="login-form-text">You don't have an account?
+                        <a href="/" className="login-form-link">Sign Up</a>
+                    </span>
+                </form>
+            </div>
+       </div>
+    )
 }
 
 export default Login;
