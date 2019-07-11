@@ -42,13 +42,6 @@ const SignupForm = ({ props }) => {
             setErrors({...errors, ...newState})     
         }
     }
-
-    // useEffect(() => {
-    //     console.log(errors)
-
-    // }, [errors])
-
-
     
     const inputs = [
         {
