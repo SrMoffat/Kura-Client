@@ -4,15 +4,14 @@ const SideNavIcon = (props) => {
 
     const { icon, iconFile, onClick, selected } = props;
     return (
-        <span className="side-pane-icons">
+        <span className={selected ? `side-pane-icons side-pane-${icon} active` : `side-pane-icons  side-pane-${icon}` }>
             <img 
-                className={selected ? `side-pane-${icon} active` : `side-pane-${icon}`}
+                className={`side-pane-${icon}`}
                 src={iconFile}
                 alt={icon}
                 onClick={onClick}          
                 >
-            </img>
-            
+            </img>            
         </span>
        
     )

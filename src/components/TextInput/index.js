@@ -16,7 +16,7 @@ const TextInput = (props) => {
                     autoFocus={autoFocus}
                     onChange={onChange}
                     required
-                    autocomplete="off"
+                    autoComplete="off"
                 />
             </div>
         </div>
