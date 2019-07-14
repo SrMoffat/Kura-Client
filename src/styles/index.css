@@ -219,9 +219,9 @@ input[type=text]:focus, input[type=password]:focus, input[type=email]:focus {
 }
 
 .login-container {  
-  /* background: red; */
   background: rgba(246, 232, 255, 0.3);
-  height: 1000px;
+  height: 100vh;
+
   
 }
 
@@ -251,10 +251,6 @@ input[type=text]:focus, input[type=password]:focus, input[type=email]:focus {
 
 .login-form label {
   color: #fff;
-}
-
-.logop-container {
-  top: 0;
 }
 
 .logop {
@@ -468,8 +464,23 @@ TODO: Add Media Query for Large Screens
   clip-path: polygon(0 0, 100% 0, 100% 75%, 0 100%);
   display: grid;
   justify-content: center;
-  align-items: center;
-  
+  align-items: center; 
+}
+
+.card-icon img {
+  height: 40px;
+  width: 40px;
+}
+
+.card-details {
+  display: flex;
+
+}
+
+.card-details-meta {
+  margin-left: 10px;
+  line-height: 20px;
+
 }
 
 .card-footer {
@@ -481,9 +492,10 @@ TODO: Add Media Query for Large Screens
   display: grid;
   grid-template-rows: repeat(3, 1fr);
   align-items: center;
-  margin-left: 25px;
+  margin-left: 30px;
 
 }
+
 
 
 
