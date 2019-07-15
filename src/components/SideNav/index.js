@@ -16,7 +16,7 @@ const SideNav = () => {
 
     return (
         <div className="side-nav">
-           <SidePane/>
+           <SidePane />
             <div className="nav">
                 <IconContainer {...navIcon} />
                 <ItemContainer/>

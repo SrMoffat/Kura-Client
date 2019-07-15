@@ -10,6 +10,7 @@ import ballot from '../../images/ballot-icon.svg';
 import logout from '../../images/logout-icon.svg';
 
 const SidePane = () => {
+
     const [selected, setSelected] = useState({
         home: false,
         cluster: false,

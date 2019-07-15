@@ -39,7 +39,7 @@ const SignupForm = ({ props }) => {
 
             const newState = { [error.field] : error.message }
 
-            setErrors({...errors, ...newState})     
+            setErrors({...newState})     
         }
     }
     
