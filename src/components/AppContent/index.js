@@ -7,6 +7,13 @@ import head from '../../images/card-head-icon.svg';
 import member from '../../images/card-member-icon.svg';
 import position from '../../images/card-position-icon.svg';
 
+import homeBC from '../../images/home-bc.svg';
+import clusterBC from '../../images/cluster-breadcrumb.svg';
+import positionBC from '../../images/positions-bc.svg';
+import nominationBC from '../../images/nominations-bc.svg';
+import voteBC from '../../images/votes-bc.svg';
+
+
 
 const cards = [
     {
@@ -151,10 +158,48 @@ const cards = [
 ]
 
 
-const AppContent = () => {
+const AppContent = (props) => {
+
+    const { page } = props;
+
+    let currentPage;
+
+    switch (page){
+        case 'cluster':
+            currentPage = {
+                icon: clusterBC,
+                text: 'Clusters'
+            }
+            break;
+        case 'position':
+            currentPage = {
+                icon: positionBC,
+                text: 'Positions'
+            }
+            break;
+        case 'nomination':
+            currentPage = {
+                icon: nominationBC,
+                text: 'Nominations'
+            }
+            break;
+        case 'ballot':
+            currentPage = {
+                icon: voteBC,
+                text: 'Votes'
+            }
+            break;
+        default:
+            currentPage = {
+                icon: homeBC,
+                text: 'Home'
+            }
+            break;
+    }
+
     return (
         <div className="app-content">
-           <Breadcrumb/>
+           <Breadcrumb currentPage={currentPage}/>
            <div className="app-content-container">
                 <div className="app-content-container-items">
                     {

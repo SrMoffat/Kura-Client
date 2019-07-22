@@ -9,7 +9,7 @@ const SideNavIcon = (props) => {
                 className={`side-pane-${icon}`}
                 src={iconFile}
                 alt={icon}
-                onClick={onClick}          
+                onClick={onClick}        
                 >
             </img>            
         </span>

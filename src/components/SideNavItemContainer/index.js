@@ -3,16 +3,13 @@ import React from 'react';
 import NavItem from '../SideNavItem';
 
 const ItemContainer = (props) => {
-    const navItems = [
-        {item: 'Add Cluster'},
-        {item: 'Add Member'},
-        {item: 'Assign Head'}
-    ]
+
+    const { items } = props;
 
     return (
         <div className="nav-items-container">
             <div className="nav-items">
-                { navItems.map(item => (<NavItem {...item}/>)) }                   
+                { items.map(item => (<NavItem text={item}/>)) }                   
             </div>
         </div>
     )

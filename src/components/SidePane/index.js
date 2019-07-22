@@ -9,59 +9,52 @@ import nomination from '../../images/nomination-icon.svg';
 import ballot from '../../images/ballot-icon.svg';
 import logout from '../../images/logout-icon.svg';
 
-const SidePane = () => {
+const SidePane = (props) => {
+
+    const { history, active } = props;
 
     const [selected, setSelected] = useState({
-        home: false,
-        cluster: false,
-        position: false,
-        nomination: false,
-        ballot: false
+        [active]: true
     });
 
     const onClick = e => {
         const icon = e.target.getAttribute('alt');
-
-        const newSelected = Object.keys(selected).reduce((acc, val) => {
-            return {
-                ...acc,
-                [val]: false
-            }
-        },{});
-
-        newSelected[icon] = true;
-
-        setSelected(newSelected);
+        history.push(`/${icon}`)
     }
 
     const navIcons = [
         {
             icon: 'home',
             iconFile: home,
+            key: home,
             onClick,
             selected: selected['home']
         },
         {
             icon: 'cluster',
             iconFile: cluster,
+            key: cluster,
             onClick,
             selected: selected['cluster']
         },
         {
             icon: 'position',
             iconFile: position,
+            key: position,
             onClick,
             selected: selected['position']
         },
         {
             icon: 'nomination',
             iconFile: nomination,
+            key: nomination,
             onClick,
             selected: selected['nomination']
         },
         {
             icon: 'ballot',
             iconFile: ballot,
+            key: ballot,
             onClick,
             selected: selected['ballot']
         }

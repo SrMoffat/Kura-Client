@@ -2,10 +2,10 @@ import React from 'react';
 
 
 const NavItem = props => {
-    const { item } = props;
+    const { text } = props;
     return(
         <div className="nav-item">
-            <span className="">{item}</span>
+            <span className="">{text}</span>
         </div>
     )
 }

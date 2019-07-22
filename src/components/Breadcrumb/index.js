@@ -1,11 +1,13 @@
 import React from 'react';
 
 import back from '../../images/back-btn.svg';
-import clusterBC from '../../images/cluster-breadcrumb.svg';
 import slash from '../../images/Line.svg';
 
 
-const Breadcrumb = () => {
+const Breadcrumb = (props) => {
+
+    const { currentPage: { icon, text } } = props;
+
     return (
         <div className="breadcrumb">              
             <img
@@ -17,13 +19,13 @@ const Breadcrumb = () => {
             <div className="breadcrumb-content">
                 <span className="breadcrumb-icon">
                         <img
-                            src={clusterBC} 
-                            alt={clusterBC}                       
+                            src={icon} 
+                            alt={icon}                       
                         >
                         </img>  
                 </span>
                 <span className="breadcrumb-text" style={{color: '#46307B'}}>
-                    Clusters
+                    {text}
                 </span>
             </div>
             <img src={slash} alt={slash}></img>
