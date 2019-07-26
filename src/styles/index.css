@@ -224,8 +224,6 @@ input[type=text]:focus, input[type=password]:focus, input[type=email]:focus {
 .login-container {  
   background: rgba(246, 232, 255, 0.3);
   height: 100vh;
-
-  
 }
 
 .login-section {
@@ -249,7 +247,6 @@ input[type=text]:focus, input[type=password]:focus, input[type=email]:focus {
   margin: auto;
   width: 30%;
   margin-top: 70px;
-
 }
 
 .login-form label {
@@ -341,8 +338,6 @@ input[type=text]:focus, input[type=password]:focus, input[type=email]:focus {
   transition: all .2s;
 }
 
-
-
 .nav {
   color: #fff;
   display: grid;
@@ -430,11 +425,13 @@ input[type=text]:focus, input[type=password]:focus, input[type=email]:focus {
 .breadcrumb-text {
   margin-left: 0.2em;
 }
-/* 
-.breadcrumb-back-button:hover {
-  transform: translateX(-5px);
 
-} */
+.app-content-container-items {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr))!important;
+      grid-gap: 2em;
+      padding: 5px;
+    }
 
 .app-content-container {
   margin: 0 80px;
@@ -442,18 +439,6 @@ input[type=text]:focus, input[type=password]:focus, input[type=email]:focus {
   height: 100vh;
   overflow-y: scroll;
 }
-
-/* 
-TODO: Add Media Query for Large Screens
-
-.app-content-container {
-  width: 85em;
-} */
-
-.app-content-container-items {
-  padding: 5px;
-}
-
 
 .card {
   display: grid;
@@ -479,7 +464,6 @@ TODO: Add Media Query for Large Screens
 
 .card-details {
   display: flex;
-  
 }
 
 .card-details-meta {
@@ -487,7 +471,6 @@ TODO: Add Media Query for Large Screens
   line-height: 20px;
   color: #777;
   font-size: 12px;
-  
 }
 
 .card-footer {
@@ -500,7 +483,6 @@ TODO: Add Media Query for Large Screens
   grid-template-rows: repeat(3, 1fr);
   align-items: center;
   margin-left: 30px;
-  
 }
 
 .card-text {
@@ -508,11 +490,36 @@ TODO: Add Media Query for Large Screens
   font-weight: bold;
 }
 
+
 .modal-house {
   position: fixed;
   top: 0;
+  left: 0;
+  z-index: 1;
   width: 100%;
   height: 100%;
+  animation: overlayLaunch .2s;
+  transition: all .2s;
+}
+
+.modal-house.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.modal-house.close {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.modal-house.open .modal {
+  transform: scale(1) translate(-50%, -50%);
+  position: absolute;
+}
+
+.modal-house.close .modal {
+  transform: scale(0.4) translate(-50%, -50%);
+  position: absolute;
 }
 
 .modal-house::before {
@@ -520,8 +527,8 @@ TODO: Add Media Query for Large Screens
   position: absolute;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
-  
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.8);  
 }
 
 .modal-container {
@@ -537,36 +544,63 @@ TODO: Add Media Query for Large Screens
   max-width: 480px;
   width: 100%;
   top: 50%;
+  transform-origin: 0 0;
   left: 50%;
   z-index: 1;
-  transform: translate(-50%, -50%);
+  transition: all .4s;
+  animation: modalOpen 0.4s;
 }
 
  .modal-bottom-shape {
+  user-select: none;
   position: absolute;
   top: 250px;
   left: -150px;
   z-index: -1;
-  
 }
 
 .modal-top-shape {
+  user-select: none;
   position: absolute;
   top: -322px;
   right: -380px;
   z-index: -1;
-  
 }
 
 .modal-header {
   background-color: #3B2D5C;
-  display: grid;
-  grid-template-rows: 70px 1fr;
-  justify-content: center;
+  display: flex;
   align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
   color: #fff;
   border-radius: 5px 5px 0 0;
   z-index: 2;
+}
+
+.modal-close-btn {
+  user-select: none;
+  align-self: flex-end;
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  padding: 5px 5px;
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+  background-color: #3B2D5C;
+}
+
+.modal-close-icon {
+  position: absolute;
+  top: 12px;
+  right: 13px;
+}
+
+.modal-close-btn:hover {
+  background-color: rgb(66, 49, 105);
+  cursor: pointer;
 }
 
 .modal-body {
@@ -596,6 +630,7 @@ TODO: Add Media Query for Large Screens
   margin: auto;
   outline: none;
   transition: all .2s;
+  cursor: pointer;
 }
 
 .modal-button:hover {
@@ -609,12 +644,12 @@ TODO: Add Media Query for Large Screens
 }
 
 .modal-content {
-  /* background: red; */
   display: grid;
   transition: all .2s;
 }
 
 .modal-icon {
+  user-select: none;
   display: grid;
   justify-content: center;
   align-items: center;
@@ -627,9 +662,9 @@ TODO: Add Media Query for Large Screens
 
 .modal-title {
   text-align: center;
+  margin-top: 85px;
+  user-select: none;
 }
-
-
 
 
 @keyframes moveInLeft {
@@ -674,8 +709,27 @@ TODO: Add Media Query for Large Screens
   }
 }
 
-.app-content-container-items {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr))!important;
-  grid-gap: 2em;
+@keyframes overlayLaunch {
+  from{
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modalOpen {
+  from{
+    transform: scale(0.4);
+    position: absolute;
+    top: 20%;
+    left: 30%;
+  }
+  to {
+    transform: scale(1);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 }

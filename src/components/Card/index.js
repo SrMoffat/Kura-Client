@@ -11,7 +11,7 @@ const Card = (props) => {
             </div>
             <div className="card-body">
             {
-                details.map(card => (<CardDetails {...card}/>))
+                details.map((card , index)=> (<CardDetails {...card} key={index}/>))
             } 
             </div>
         <div className="card-footer"></div>

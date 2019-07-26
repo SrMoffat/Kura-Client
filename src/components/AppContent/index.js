@@ -203,7 +203,7 @@ const AppContent = (props) => {
            <div className="app-content-container">
                 <div className="app-content-container-items">
                     {
-                        cards.map(card => (<Card {...card}/>))
+                        cards.map((card, index) => (<Card {...card} key={index}/>))
                     }
                 </div>             
            </div>

@@ -11,7 +11,7 @@ import nominationtrans from '../../images/nomination-trans.svg';
 import ballottrans from '../../images/ballot-trans.svg';
 
 const SideNav = (props) => {
-    const { history, match: { path } } = props;
+    const { history, match: { path }, onItemClick } = props;
 
     const [active, setActive] = useState(path.substring(1));
 
@@ -63,10 +63,10 @@ const SideNav = (props) => {
 
     return (
         <div className="side-nav">
-           <SidePane active={active} history={history}/>
+           <SidePane active={active} history={history} setActive={setActive}/>
             <div className="nav">
                 <IconContainer {...navIcon} />
-                <ItemContainer items={navItems}/>
+                <ItemContainer items={navItems} onItemClick={onItemClick}/>
             </div>
         </div>
     )

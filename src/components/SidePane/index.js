@@ -76,7 +76,7 @@ const SidePane = (props) => {
             { renderSidePaneLogo(logo, 'logo') }
             
             <div className="main-side-nav">
-                { navIcons.map(icon => (<SideNavIcon {...icon} />)) }        
+                { navIcons.map(icon => (<SideNavIcon {...icon} setSelected={setSelected}/>)) }        
             </div>  
                   
             { renderSidePaneLogo(logout, 'logout') }
