@@ -8,6 +8,7 @@ const SIGNUP_MUTATION = gql`
             password: $password
         ){
             payload {
+                message
                 token
                 user {
                         user_id
@@ -30,6 +31,7 @@ const LOGIN_MUTATION = gql`
             password: $password
         ){
             payload {
+                message
                 token
                 user {
                     user_id
