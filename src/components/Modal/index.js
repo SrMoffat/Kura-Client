@@ -16,7 +16,7 @@ const { CREATE_CLUSTER_MUTATION } = CLUSTER_MUTATIONS;
 const Modal = (props) => {
     const { open, handleClose, input, clusterName } = props;
 
-    const confirm = (data) => {
+    const sent = async (data) => {
         console.log(data);
     }
 
@@ -52,11 +52,11 @@ const Modal = (props) => {
                             <Mutation
                                 mutation={CREATE_CLUSTER_MUTATION}
                                 variables={{clusterName}}
-                                onCompleted={data => confirm(data)}
+                                onCompleted={data => sent(data)}
                             >
                                 {
                                     mutation => (
-                                    <button type="submit" className="modal-button" onClick={mutation}>
+                                    <button className="modal-button" onClick={mutation}>
                                         Submit
                                     </button>
                                     )
