@@ -1,28 +1,26 @@
 import React, { useState } from 'react';
-import toastr from 'toastr';
 import { Mutation } from 'react-apollo';
 
 import AUTHMUTATIONS from '../../queries/mutation/Auth';
 import TextInput from '../TextInput';
 import AUTH_TOKEN from '../../constants';
 
+import { successMessages } from '../../utils';
+
 const { SIGNUP_MUTATION } = AUTHMUTATIONS;
 
 const SignupForm = ({ props }) => {
     const [values, setValues] = useState({});
     const { name, email, password } = values;
-
     const [errors, setErrors] = useState({})
 
     const onChange = (e) => {
         const { target: { name, value } } = e;
-
         const newState = { ...values, [name]: value }
         setValues(newState);
     }
 
     const handleSubmit = e => { e.preventDefault() }
-
     const saveUserData = token => { localStorage.setItem(AUTH_TOKEN, token) }
 
     
@@ -33,33 +31,12 @@ const SignupForm = ({ props }) => {
             const { history } = props;
             const { token, message } = payload;
 
-            toastr.options = {
-                "closeButton": true,
-                "debug": false,
-                "newestOnTop": true,
-                "progressBar": true,
-                "positionClass": "toast-top-right",
-                "preventDuplicates": true,
-                "onclick": null,
-                "showDuration": "300",
-                "hideDuration": "1000",
-                "timeOut": "5000",
-                "extendedTimeOut": "1000",
-                "showEasing": "swing",
-                "hideEasing": "linear",
-                "showMethod": "fadeIn",
-                "hideMethod": "fadeOut"
-              }
-
-            toastr.success(message);
-
+            successMessages(message);
             saveUserData(token);
              
             history.push('/cluster');
         } else {
-
             const newState = { [error.field] : error.message }
-
             setErrors({...newState})     
         }
     }
