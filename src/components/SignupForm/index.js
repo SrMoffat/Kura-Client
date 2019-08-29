@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import toastr from 'toastr';
 import { Mutation } from 'react-apollo';
 
-import AUTHMUTATIONS from '../../queries/mutation/Auth';
 import TextInput from '../TextInput';
+import { successMessages } from '../../utils/alerter';
+
+import AUTHMUTATIONS from '../../queries/mutation/Auth';
 import AUTH_TOKEN from '../../constants';
 
 const { SIGNUP_MUTATION } = AUTHMUTATIONS;
@@ -33,25 +34,7 @@ const SignupForm = ({ props }) => {
             const { history } = props;
             const { token, message } = payload;
 
-            toastr.options = {
-                "closeButton": true,
-                "debug": false,
-                "newestOnTop": true,
-                "progressBar": true,
-                "positionClass": "toast-top-right",
-                "preventDuplicates": true,
-                "onclick": null,
-                "showDuration": "300",
-                "hideDuration": "1000",
-                "timeOut": "5000",
-                "extendedTimeOut": "1000",
-                "showEasing": "swing",
-                "hideEasing": "linear",
-                "showMethod": "fadeIn",
-                "hideMethod": "fadeOut"
-              }
-
-            toastr.success(message);
+            successMessages(message);
 
             saveUserData(token);
              
