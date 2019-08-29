@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Mutation } from 'react-apollo';
+import { useMutation } from '@apollo/react-hooks';
 
 import TextInput from '../TextInput';
 import { successMessages } from '../../utils/alerter';
@@ -14,6 +14,9 @@ const SignupForm = ({ props }) => {
     const { name, email, password } = values;
 
     const [errors, setErrors] = useState({})
+    const [signUp, { loading, error, data }] = useMutation(SIGNUP_MUTATION);
+
+    console.log({loading, data, error});
 
     const onChange = (e) => {
         const { target: { name, value } } = e;
@@ -22,9 +25,17 @@ const SignupForm = ({ props }) => {
         setValues(newState);
     }
 
-    const handleSubmit = e => { e.preventDefault() }
+    const handleSubmit = e => {
+        e.preventDefault();
+        signUp({ variables: {
+            name, email, password            
+        }});
+
+    }
 
     const saveUserData = token => { localStorage.setItem(AUTH_TOKEN, token) }
+
+
 
     
     const confirm = async (data) => {
@@ -82,18 +93,9 @@ const SignupForm = ({ props }) => {
 
     return(
         <form onSubmit={handleSubmit}>
-            {
-                inputs.map(input => (<TextInput {...input} />))
-            }
-            <Mutation
-                mutation={SIGNUP_MUTATION}
-                variables={{ name, email, password }}
-                onCompleted={data => confirm(data)}            
-            >
-                {mutation => (
-                    <button className="btn btn-purple" onClick={mutation}>Sign Up</button>               
-                )}
-            </Mutation>
+            { inputs.map(input => (<TextInput {...input} />)) }
+              
+            <button className="btn btn-purple">Sign Up</button>  
 
             <span className="form-text">Already have an account?
                 <a href="/login" className="form-link">Login</a>
